@@ -8,9 +8,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import tw from 'twrnc';
+import Icon from 'react-native-vector-icons/AntDesign';
 const VerifyOTP = () => (
   <ScrollView style={tw`bg-[#051726]`}>
-    <View style={tw`flex items-center mt-24`}>
+    <TouchableOpacity style={tw`flex flex-row gap-2 ml-2 mt-4`}>
+        <Icon name="left" size={17} color="white" />
+        <Text style={tw`text-white text-xs`}>Back to Login</Text>
+    </TouchableOpacity>
+    <View style={tw`flex items-center mt-16`}>
       <Text style={tw`text-white text-3xl`}>Verify OTP</Text>
     </View>
     <View style={tw`gap-4`}>
