@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {TouchableOpacity, Image, ScrollView, View, Text} from 'react-native';
+import { TouchableOpacity, Image, ScrollView, View, Text } from 'react-native';
 import tw from 'twrnc';
+
 const OpeningPage = () => {
   return (
     <ScrollView style={tw`bg-white`}>
-      <View style={tw`bg-[#1A87DD] h-[125] rounded-b-[100px]`}>
+      <View style={tw`bg-[#1A87DD] h-125 rounded-b-100`}>
         <View style={tw`flex items-center mt-28`}>
           <Image style={tw`w-56 h-56`} source={require('./Images/FullLogo.png')} />
         </View>
@@ -17,10 +18,12 @@ const OpeningPage = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={tw`text-[#1A87DD]`}>Already have Account? Log In</Text>
+          <Text style={tw`text-[#1A87DD]`}>Already have an Account? Log In</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
 };
+
 export default OpeningPage;
+
