@@ -1,76 +1,87 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
 import {
+  Dimensions,
   ScrollView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
-import tw from 'twrnc';
+import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
-const OTPage = () => {
-  const [OTP,setOTP] = useState('');
-  const [check,setCheck] = useState(false);
-  const [resend,setResend] = useState(30);
+import { StackScreens } from '../App';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+const { width, height } = Dimensions.get('screen');
+type propsType = NativeStackScreenProps<StackScreens,'OTPage'>
+
+const OTPage = (props: propsType) => {
+  const [OTP, setOTP] = useState('');
+  const [check, setCheck] = useState(false);
+  const [resend, setResend] = useState(30);
+
   const Navigation = useNavigation();
-  useEffect(()=>{
-    const intervel = setInterval(()=>{
-      if (resend === 0){
-        clearInterval(intervel);
+  const { navigation } = props;
+
+  const GoDashboard = () => {
+    navigation.navigate('Dashboard');
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (resend === 0) {
+        clearInterval(interval);
         setCheck(true);
       } else {
         setResend(resend - 1);
       }
-    },1000);
-    return () =>{
-      clearInterval(intervel);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
     };
-  },[resend]);
+  }, [resend]);
+
   return (
-    <ScrollView style={tw`bg-white`}>
-      <View style={tw`bg-[#1A87DD] h-72 rounded-b-16`}>
-      <View style={tw`flex flex-row items-start ml-2 mt-2 `}>
-        <TouchableOpacity style={tw`flex flex-row`} onPress={()=> Navigation.goBack()}>
-          <Icon name="left" size={18} style={tw`text-white`} />
-          <Text style={tw`text-white`}>Back</Text>
-        </TouchableOpacity>
-      </View>
-        <View style={tw`flex mt-24 ml-8 gap-2`}>
-          <Text style={tw`text-white text-3xl font-bold`}>Verify OTP</Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.backButton}>
+          <TouchableOpacity style={styles.backButtonText} onPress={() => Navigation.goBack()}>
+            <Icon name="left" size={18} style={styles.backButtonIcon} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Verify OTP and</Text>
+          <Text style={styles.title}>Get Started</Text>
         </View>
       </View>
-      <View style={tw`gap-8`}>
-        <View style={tw`flex mt-24 gap-4`}>
-          <View style={tw`flex ml-8`}>
-              <View>
-                <Text style={tw`text-black`}>Enter OTP</Text>
-                <TextInput
-                  style={tw`border border-2 border-gray-100 p-2 mt-2 w-72 rounded-lg`}
-                  placeholder="Enter OTP"
-                  placeholderTextColor="gray"
-                  value={OTP}
-                  onChangeText={(text)=>setOTP(text)}
-                />
-              </View>
-          </View>
+      <View style={styles.rowContainer}>
+        <View style={styles.otpContainer}>
+          <TextInput
+            mode="outlined"
+            style={styles.input}
+            label="Enter OTP"
+            value={OTP}
+            onChangeText={(text) => setOTP(text)}
+          />
         </View>
-        <View style={tw`flex items-center gap-4`}>
-          <TouchableOpacity style={tw`bg-[#1A87DD] w-76 h-12 rounded-lg`}>
-            <View style={tw`flex items-center mt-3.5`}>
-              <Text style={tw`text-white`}>Verify OTP</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.verifyButton} onPress={GoDashboard}>
+            <View style={styles.verifyButtonTextContainer}>
+              <Text style={styles.verifyButtonText}>Verify OTP</Text>
             </View>
           </TouchableOpacity>
-          <View style={tw``}>
+          <View style={styles.resendLink}>
             {check ? (
-                <TouchableOpacity>
-                    <Text style={tw`text-[#1A87DD] underline`}>Resend OTP</Text>
-                </TouchableOpacity>
+              <TouchableOpacity>
+                <Text style={styles.resendText}>Resend OTP</Text>
+              </TouchableOpacity>
             ) : (
-                <TouchableOpacity>
-                    <Text style={tw`text-[#1A87DD]`}>Resend OTP in {resend}</Text>
-                </TouchableOpacity>
+              <TouchableOpacity>
+                <Text style={styles.resendText}>Resend OTP in {resend}</Text>
+              </TouchableOpacity>
             )}
           </View>
         </View>
@@ -78,5 +89,85 @@ const OTPage = () => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  header: {
+    backgroundColor: '#1A87DD',
+    height: height * 0.40,
+    borderBottomLeftRadius: 36,
+    borderBottomRightRadius: 36,
+  },
+  backButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginLeft: 10,
+    marginTop: 10,
+  },
+  backButtonIcon: {
+    color: 'white',
+  },
+  backButtonText: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  titleContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+    marginLeft: width * 0.1,
+    marginBottom: height * 0.18,
+  },
+  title: {
+    color: 'white',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  rowContainer: {
+    rowGap: 32,
+    marginTop: height * 0.1,
+    alignItems: 'center',
+  },
+  otpContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  label: {
+    color: 'black',
+  },
+  input: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    width: width * 0.7,
+  },
+  buttonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    rowGap: 16,
+  },
+  verifyButton: {
+    backgroundColor: '#1A87DD',
+    height: height * 0.055,
+    width: width * 0.7,
+    borderRadius: 10,
+  },
+  verifyButtonTextContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  verifyButtonText: {
+    color: 'white',
+  },
+  resendLink: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  resendText: {
+    color: '#1A87DD',
+  },
+});
 
 export default OTPage;

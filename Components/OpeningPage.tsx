@@ -1,38 +1,87 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { TouchableOpacity, Image, ScrollView, View, Text } from 'react-native';
-import tw from 'twrnc';
+import { TouchableOpacity, Image, ScrollView, View, Text, Dimensions, StyleSheet } from 'react-native';
 import { StackScreens } from '../App';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-type propsType = NativeStackScreenProps<StackScreens,'OpeningPage'>
-const OpeningPage = (props:propsType) => {
-  const {navigation} = props;
-  const GoToSignUp = () =>{
+
+type propsType = NativeStackScreenProps<StackScreens, 'OpeningPage'>;
+
+const OpeningPage = (props: propsType) => {
+  const { navigation } = props;
+
+  const GoToSignUp = () => {
     navigation.navigate('SignUpPage');
   };
-  const GoToLogIn = () =>{
+
+  const GoToLogIn = () => {
     navigation.navigate('LogInPage');
   };
+
   return (
-    <ScrollView style={tw`bg-white`}>
-      <View style={tw`bg-[#1A87DD] h-125 rounded-b-28`}>
-        <View style={tw`flex items-center mt-28`}>
-          <Image style={tw`w-56 h-56`} source={require('./Images/FullLogo.png')} />
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.logoImage} source={require('./Images/FullLogo.png')} />
         </View>
       </View>
-      <View style={tw`flex items-center mt-24 gap-6`}>
-        <TouchableOpacity style={tw`bg-[#1A87DD] w-72 h-12 rounded-lg`} onPress={GoToSignUp}>
-          <View style={tw`flex items-center mt-3.5`}>
-            <Text style={tw`text-white`}>Create New Account</Text>
+      <View style={styles.content}>
+        <TouchableOpacity style={styles.button} onPress={GoToSignUp}>
+          <View style={styles.buttonContent}>
+            <Text style={styles.buttonText}>Create New Account</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={GoToLogIn}>
-          <Text style={tw`text-[#1A87DD]`}>Already have an Account? Log In</Text>
+          <Text style={styles.loginText}>Already have an Account? Log In</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
 };
 
-export default OpeningPage;
+const { width, height } = Dimensions.get('screen');
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  header: {
+    backgroundColor: '#1A87DD',
+    height: height * 0.60,
+    borderBottomLeftRadius: 45,
+    borderBottomRightRadius: 45,
+  },
+  imageContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoImage: {
+    width: width * 0.54,
+    height: height * 0.2,
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: height * 0.15,
+    rowGap: 12,
+  },
+  button: {
+    backgroundColor: '#1A87DD',
+    height: height * 0.06,
+    width: width * 0.7,
+    borderRadius: 10,
+  },
+  buttonContent: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'white',
+  },
+  loginText: {
+    color: '#1A87DD',
+  },
+});
+
+export default OpeningPage;

@@ -8,11 +8,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUpPage from './Components/SignUpPage';
 import LogInPage from './Components/LogIn';
 import OTPage from './Components/Otp';
+import Dashboard from './Components/Dashboard';
 export type StackScreens = {
   OpeningPage: undefined;
   SignUpPage: undefined;
   LogInPage: undefined;
   OTPage: undefined;
+  Dashboard: undefined;
 }
 const Stack = createNativeStackNavigator<StackScreens>();
 const App = () => {
@@ -28,6 +30,7 @@ const App = () => {
         <Stack.Screen name="SignUpPage" component={SignUpPage} />
         <Stack.Screen name="LogInPage" component={LogInPage} />
         <Stack.Screen name="OTPage" component={OTPage} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );

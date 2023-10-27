@@ -1,86 +1,171 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import {
+  Dimensions,
   ScrollView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
-import tw from 'twrnc';
-import { StackScreens } from '../App';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
-type propsType = NativeStackScreenProps<StackScreens,'SignUpPage'>
+import { StackScreens } from '../App';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+const { width, height } = Dimensions.get('screen');
+type propsType = NativeStackScreenProps<StackScreens, 'SignUpPage'>;
+
 const SignUpPage = (props: propsType) => {
-  const [firstname,setName] = useState('');
-  const [regno,setRegNo] = useState('');
-  const [mobileno,setMobileNo] = useState('');
-  const {navigation} = props;
+  const [firstname, setName] = useState('');
+  const [regno, setRegNo] = useState('');
+  const [mobileno, setMobileNo] = useState('');
+  const { navigation } = props;
+
   const Navigation = useNavigation();
-  const GoToLogIn = () =>{
+
+  const GoToLogIn = () => {
     navigation.navigate('LogInPage');
   };
+
   return (
-    <ScrollView style={tw`bg-white`}>
-      <View style={tw`bg-[#1A87DD] h-72 rounded-b-16`}>
-        <View style={tw`flex flex-row items-start ml-2 mt-2 `}>
-          <TouchableOpacity style={tw`flex flex-row`} onPress={()=> Navigation.goBack()}>
-          <Icon name="left" size={18} style={tw`text-white`} />
-          <Text style={tw`text-white`}>Back</Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.backButton}>
+          <TouchableOpacity style={styles.backButtonText} onPress={() => Navigation.goBack()}>
+            <Icon name="left" size={18} style={styles.backButtonIcon} />
           </TouchableOpacity>
         </View>
-        <View style={tw`flex mt-20 ml-8 gap-2`}>
-          <Text style={tw`text-white text-3xl font-bold`}>SignUp and start</Text>
-          <Text style={tw`text-white text-3xl font-bold`}>Transfering</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Sign Up and Start</Text>
+          <Text style={styles.title}>Transferring</Text>
         </View>
       </View>
-      <View style={tw`gap-8`}>
-        <View style={tw`flex mt-8 gap-4`}>
-          <View style={tw`flex ml-8`}>
-            <Text style={tw`text-black`}>Name</Text>
+      <View style={styles.rowContainer}>
+        <View style={styles.formContainer}>
+          <View style={styles.inputContainer}>
             <TextInput
-              style={tw`border border-2 border-gray-100 p-2 mt-2 w-72 rounded-lg`}
-              placeholder="Enter your First Name"
-              placeholderTextColor="gray"
+              mode="outlined"
+              style={styles.input}
+              label="Full Name"
               value={firstname}
-              onChangeText={(text)=>setName(text)}
+              onChangeText={(text) => setName(text)}
             />
           </View>
-          <View style={tw`flex ml-8`}>
-            <Text style={tw`text-black`}>Reg No.</Text>
+          <View style={styles.inputContainer}>
             <TextInput
-              style={tw`border border-2 border-gray-100 p-2 mt-2 w-72 rounded-lg`}
-              placeholder="Enter your Last Name"
-              placeholderTextColor="gray"
+              mode="outlined"
+              style={styles.input}
+              label="Registration Number"
               value={regno}
-              onChangeText={(text)=>setRegNo(text)}
+              onChangeText={(text) => setRegNo(text)}
             />
           </View>
-          <View style={tw`flex ml-8`}>
-            <Text style={tw`text-black`}>Mobile Number</Text>
+          <View style={styles.inputContainer}>
             <TextInput
-              style={tw`border border-2 border-gray-100 p-2 mt-2 w-72 rounded-lg`}
-              placeholder="Enter your mobile number"
-              placeholderTextColor="gray"
+              mode = "outlined"
+              style={styles.input}
+              label="Mobile number"
               value={mobileno}
-              onChangeText={(text)=>setMobileNo(text)}
+              onChangeText={(text) => setMobileNo(text)}
             />
           </View>
         </View>
-        <View style={tw`flex items-center gap-4`}>
-          <TouchableOpacity style={tw`bg-[#1A87DD] w-76 h-12 rounded-lg`}>
-            <View style={tw`flex items-center mt-3.5`}>
-              <Text style={tw`text-white`}>Register</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.registerButton} onPress={GoToLogIn}>
+            <View style={styles.registerButtonTextContainer}>
+              <Text style={styles.registerButtonText}>Register</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={GoToLogIn}>
-            <Text style={tw`text-[#1A87DD]`}>Already have Account? Log In</Text>
-          </TouchableOpacity>
+          <View style={styles.loginLink}>
+            <TouchableOpacity onPress={GoToLogIn}>
+              <Text style={styles.loginText}>Already have an Account? Log In</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  header: {
+    backgroundColor: '#1A87DD',
+    height: height * 0.40,
+    borderBottomLeftRadius: 36,
+    borderBottomRightRadius: 36,
+  },
+  backButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginLeft: 10,
+    marginTop: 10,
+  },
+  backButtonIcon: {
+    color: 'white',
+  },
+  backButtonText: {
+    flex:1,
+    flexDirection: 'row',
+  },
+  titleContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+    marginLeft: width * 0.1,
+    marginBottom: height * 0.18,
+  },
+  title: {
+    color: 'white',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  rowContainer: {
+    rowGap: height * 0.04,
+  },
+  formContainer: {
+    rowGap: 20,
+    marginTop: height * 0.05,
+    alignItems: 'center',
+  },
+  inputContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  input: {
+    backgroundColor: 'white',
+    width: width * 0.7,
+  },
+  buttonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    rowGap: 16,
+  },
+  registerButton: {
+    backgroundColor: '#1A87DD',
+    height: height * 0.055,
+    width: width * 0.7,
+    borderRadius: 10,
+  },
+  registerButtonTextContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  registerButtonText: {
+    color: 'white',
+  },
+  loginLink: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  loginText: {
+    color: '#1A87DD',
+  },
+});
+
 export default SignUpPage;
