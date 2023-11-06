@@ -1,13 +1,22 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { TouchableOpacity, Image, ScrollView, View, Text, Dimensions, StyleSheet } from 'react-native';
-import { StackScreens } from '../App';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  View,
+  Text,
+  Dimensions,
+  StyleSheet,
+  StatusBar,
+} from 'react-native';
+import {StackScreens} from '../App';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 type propsType = NativeStackScreenProps<StackScreens, 'OpeningPage'>;
 
 const OpeningPage = (props: propsType) => {
-  const { navigation } = props;
+  const {navigation} = props;
 
   const GoToSignUp = () => {
     navigation.navigate('SignUpPage');
@@ -19,9 +28,13 @@ const OpeningPage = (props: propsType) => {
 
   return (
     <ScrollView style={styles.container}>
+      <StatusBar backgroundColor="#1A87DD" />
       <View style={styles.header}>
         <View style={styles.imageContainer}>
-          <Image style={styles.logoImage} source={require('./Images/FullLogo.png')} />
+          <Image
+            style={styles.logoImage}
+            source={require('./Images/FullLogo.png')}
+          />
         </View>
       </View>
       <View style={styles.content}>
@@ -38,7 +51,7 @@ const OpeningPage = (props: propsType) => {
   );
 };
 
-const { width, height } = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
   container: {
@@ -46,7 +59,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#1A87DD',
-    height: height * 0.60,
+    height: height * 0.6,
     borderBottomLeftRadius: 45,
     borderBottomRightRadius: 45,
   },

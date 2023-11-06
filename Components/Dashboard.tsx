@@ -13,8 +13,19 @@ import {
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {StackScreens} from '../App';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 const {width, height} = Dimensions.get('screen');
-const Dashboard = () => {
+type propsType = NativeStackScreenProps<StackScreens, 'Dashboard'>;
+
+const Dashboard = (props: propsType) => {
+  const {navigation} = props;
+  const goToSendMoney = () => {
+    navigation.navigate('SendMoney');
+  };
+  const goToReceiveMoney = () => {
+    navigation.navigate('ReceiveMoney');
+  };
   return (
     <ScrollView style={styles.container}>
       <ImageBackground
@@ -34,7 +45,9 @@ const Dashboard = () => {
       </ImageBackground>
       <View style={styles.header1}>
         <View style={styles.actionButton}>
-          <TouchableOpacity style={styles.actionButtonContent}>
+          <TouchableOpacity
+            style={styles.actionButtonContent}
+            onPress={goToSendMoney}>
             <View style={styles.actionButtonText}>
               <Icon
                 name="caretup"
@@ -51,6 +64,7 @@ const Dashboard = () => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={goToReceiveMoney}
             style={{
               backgroundColor: '#1A87DD',
               height: 48,
