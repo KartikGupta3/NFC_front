@@ -43,6 +43,29 @@ const ReceiveMoney = () => {
             Receive Money
           </Text>
         </View>
+        <View style={{flex: 1, flexDirection: 'row', columnGap: width * 0.05}}>
+          <View
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 50,
+              backgroundColor: 'gray',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 24,
+                fontWeight: 'bold',
+                color: 'white',
+              }}>
+              K
+            </Text>
+          </View>
+          <View style={{justifyContent: 'center'}}>
+            <Text style={{color: 'gray', fontSize: 20}}>Kartik Gupta</Text>
+          </View>
+        </View>
         <View>
           <TextInput
             mode="outlined"

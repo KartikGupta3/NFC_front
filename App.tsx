@@ -11,6 +11,7 @@ import OTPage from './Components/Otp';
 import Dashboard from './Components/Dashboard';
 import SendMoney from './Components/SendMoney';
 import ReceiveMoney from './Components/ReceiveMoney';
+import Transactions from './Components/Transactions';
 export type StackScreens = {
   OpeningPage: undefined;
   SignUpPage: undefined;
@@ -19,6 +20,7 @@ export type StackScreens = {
   Dashboard: undefined;
   SendMoney: undefined;
   ReceiveMoney: undefined;
+  Transactions: undefined;
 };
 const Stack = createNativeStackNavigator<StackScreens>();
 const App = () => {
@@ -39,6 +41,7 @@ const App = () => {
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="SendMoney" component={SendMoney} />
         <Stack.Screen name="ReceiveMoney" component={ReceiveMoney} />
+        <Stack.Screen name="Transactions" component={Transactions} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -26,6 +26,9 @@ const Dashboard = (props: propsType) => {
   const goToReceiveMoney = () => {
     navigation.navigate('ReceiveMoney');
   };
+  const goToTransactions = () => {
+    navigation.navigate('Transactions');
+  };
   return (
     <ScrollView style={styles.container}>
       <ImageBackground
@@ -83,7 +86,7 @@ const Dashboard = (props: propsType) => {
         </View>
         <View style={styles.header3}>
           <Text style={styles.lastransaction}>Your Last Transactions</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={goToTransactions}>
             <Text style={styles.view}>View All</Text>
           </TouchableOpacity>
         </View>
