@@ -12,6 +12,7 @@ import Dashboard from './Components/Dashboard';
 import SendMoney from './Components/SendMoney';
 import ReceiveMoney from './Components/ReceiveMoney';
 import Transactions from './Components/Transactions';
+import Profile from './Components/Profile';
 export type StackScreens = {
   OpeningPage: undefined;
   SignUpPage: undefined;
@@ -21,6 +22,7 @@ export type StackScreens = {
   SendMoney: undefined;
   ReceiveMoney: undefined;
   Transactions: undefined;
+  Profile: undefined;
 };
 const Stack = createNativeStackNavigator<StackScreens>();
 const App = () => {
@@ -42,6 +44,7 @@ const App = () => {
         <Stack.Screen name="SendMoney" component={SendMoney} />
         <Stack.Screen name="ReceiveMoney" component={ReceiveMoney} />
         <Stack.Screen name="Transactions" component={Transactions} />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

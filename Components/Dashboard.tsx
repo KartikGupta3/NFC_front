@@ -29,6 +29,9 @@ const Dashboard = (props: propsType) => {
   const goToTransactions = () => {
     navigation.navigate('Transactions');
   };
+  const gotToProfile = () => {
+    navigation.navigate('Profile');
+  };
   return (
     <ScrollView style={styles.container}>
       <ImageBackground
@@ -36,8 +39,30 @@ const Dashboard = (props: propsType) => {
         resizeMode="cover"
         style={styles.image}>
         <View style={styles.row}>
-          <View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.header}>Dashboard</Text>
+            <TouchableOpacity onPress={gotToProfile}>
+              <View
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 50,
+                  backgroundColor: 'white',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: height * 0.05,
+                  marginRight: width * 0.05,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: '#1A87DD',
+                  }}>
+                  K
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.row1}>
             <Text style={styles.userInfo}>Hi, Kartik</Text>
