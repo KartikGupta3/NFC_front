@@ -1,7 +1,4 @@
-/* eslint-disable prettier/prettier */
-import React, {useEffect} from 'react';
-import {Platform} from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
+import React from 'react';
 import OpeningPage from './Components/OpeningPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -26,11 +23,6 @@ export type StackScreens = {
 };
 const Stack = createNativeStackNavigator<StackScreens>();
 const App = () => {
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      SplashScreen.hide();
-    }
-  });
   return (
     <NavigationContainer>
       <Stack.Navigator
